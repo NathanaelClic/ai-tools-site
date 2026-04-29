@@ -1,0 +1,40 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const isEN = lang === 'en';
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 border-b border-gray-800/60 backdrop-blur-md bg-gray-950/80">
+  <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href={isEN ? '/' : '/pt'} class="flex items-center gap-2 font-bold text-lg text-white">
+      <span class="text-violet-400">⚡</span>
+      <span>AI Tools Weekly</span>
+    </a>
+
+    <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
+      <a href={isEN ? '/reviews' : '/pt/reviews'} class="hover:text-white transition-colors">
+        {isEN ? 'Reviews' : 'Reviews'}
+      </a>
+      <a href={isEN ? '/compare' : '/pt/compare'} class="hover:text-white transition-colors">
+        {isEN ? 'Compare' : 'Comparar'}
+      </a>
+      <a href={isEN ? '/blog' : '/pt/blog'} class="hover:text-white transition-colors">
+        Blog
+      </a>
+      <a href={isEN ? '/best-ai-tools' : '/pt/melhores-ferramentas'} class="hover:text-white transition-colors">
+        {isEN ? 'Best Tools' : 'Melhores'}
+      </a>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a href={isEN ? '/pt' : '/'} class="text-xs text-gray-400 hover:text-white transition-colors border border-gray-700 px-3 py-1.5 rounded-lg">
+        {isEN ? '🇧🇷 PT' : '🇺🇸 EN'}
+      </a>
+      <a href="#newsletter" class="btn-primary text-sm py-2 px-4">
+        {isEN ? 'Free Newsletter' : 'Newsletter Grátis'}
+      </a>
+    </div>
+  </nav>
+</header>

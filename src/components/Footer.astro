@@ -1,0 +1,60 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const isEN = lang === 'en';
+---
+
+<footer class="border-t border-gray-800 mt-24 py-12 text-gray-400 text-sm">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+      <div>
+        <p class="font-bold text-white mb-3 flex items-center gap-2">
+          <span class="text-violet-400">⚡</span> AI Tools Weekly
+        </p>
+        <p class="text-xs leading-relaxed">
+          {isEN
+            ? 'Honest reviews and comparisons of the best AI tools to grow your business.'
+            : 'Reviews honestas das melhores ferramentas de IA para crescer seu negócio.'}
+        </p>
+      </div>
+
+      <div>
+        <p class="font-semibold text-white mb-3">{isEN ? 'Reviews' : 'Reviews'}</p>
+        <ul class="space-y-2 text-xs">
+          <li><a href={isEN ? '/reviews/jasper-ai' : '/pt/reviews/jasper-ai'} class="hover:text-white transition-colors">Jasper AI</a></li>
+          <li><a href={isEN ? '/reviews/surfer-seo' : '/pt/reviews/surfer-seo'} class="hover:text-white transition-colors">Surfer SEO</a></li>
+          <li><a href={isEN ? '/reviews/copy-ai' : '/pt/reviews/copy-ai'} class="hover:text-white transition-colors">Copy.ai</a></li>
+          <li><a href={isEN ? '/reviews' : '/pt/reviews'} class="hover:text-white transition-colors">{isEN ? 'All Reviews →' : 'Todas →'}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-semibold text-white mb-3">{isEN ? 'Compare' : 'Comparar'}</p>
+        <ul class="space-y-2 text-xs">
+          <li><a href={isEN ? '/compare/jasper-vs-copy-ai' : '/pt/compare/jasper-vs-copy-ai'} class="hover:text-white transition-colors">Jasper vs Copy.ai</a></li>
+          <li><a href={isEN ? '/compare/chatgpt-vs-claude' : '/pt/compare/chatgpt-vs-claude'} class="hover:text-white transition-colors">ChatGPT vs Claude</a></li>
+          <li><a href={isEN ? '/compare' : '/pt/compare'} class="hover:text-white transition-colors">{isEN ? 'All Comparisons →' : 'Todas →'}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="font-semibold text-white mb-3">{isEN ? 'Resources' : 'Recursos'}</p>
+        <ul class="space-y-2 text-xs">
+          <li><a href={isEN ? '/blog' : '/pt/blog'} class="hover:text-white transition-colors">Blog</a></li>
+          <li><a href={isEN ? '/best-ai-tools' : '/pt/melhores-ferramentas'} class="hover:text-white transition-colors">{isEN ? 'Best AI Tools' : 'Melhores Ferramentas'}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+      <p>© {new Date().getFullYear()} AI Tools Weekly. {isEN ? 'All rights reserved.' : 'Todos os direitos reservados.'}</p>
+      <p class="text-gray-600">
+        {isEN
+          ? '⚠️ This site contains affiliate links. We may earn a commission at no extra cost to you.'
+          : '⚠️ Este site contém links de afiliado. Podemos ganhar comissão sem custo extra para você.'}
+      </p>
+    </div>
+  </div>
+</footer>

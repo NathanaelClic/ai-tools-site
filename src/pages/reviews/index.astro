@@ -1,0 +1,55 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const reviews = [
+  { name: 'Jasper AI', slug: 'jasper-ai', emoji: '✍️', category: 'Writing', rating: 4.8, desc: 'Best AI writer for marketing teams.', badge: "Editor's Choice", badgeColor: 'bg-violet-600' },
+  { name: 'Surfer SEO', slug: 'surfer-seo', emoji: '🏄', category: 'SEO', rating: 4.7, desc: 'Top on-page SEO optimization tool.', badge: 'Best for SEO', badgeColor: 'bg-emerald-600' },
+  { name: 'Copy.ai', slug: 'copy-ai', emoji: '📝', category: 'Copywriting', rating: 4.6, desc: 'Best free AI copywriting tool.', badge: 'Best Free Plan', badgeColor: 'bg-orange-600' },
+  { name: 'Writesonic', slug: 'writesonic', emoji: '🚀', category: 'Writing', rating: 4.5, desc: 'Affordable AI writer with SEO features.', badge: 'Best Value', badgeColor: 'bg-blue-600' },
+  { name: 'Claude AI', slug: 'claude-ai', emoji: '🤖', category: 'AI Assistant', rating: 4.9, desc: 'Most reliable AI for complex tasks.', badge: 'Top Rated', badgeColor: 'bg-rose-600' },
+  { name: 'SEMrush', slug: 'semrush', emoji: '📊', category: 'Marketing', rating: 4.7, desc: 'All-in-one marketing platform with AI.', badge: 'High Ticket', badgeColor: 'bg-yellow-600' },
+];
+---
+
+<Layout
+  title="AI Tool Reviews 2025 — Honest, In-Depth Reviews | AI Tools Weekly"
+  description="Browse all our AI tool reviews for 2025. Honest, hands-on reviews of writing, SEO, marketing, and productivity AI tools."
+  lang="en"
+>
+  <Navbar lang="en" />
+
+  <main class="pt-28 pb-16 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-14">
+        <h1 class="text-4xl font-bold text-white mb-4">AI Tool Reviews</h1>
+        <p class="text-gray-400 max-w-xl mx-auto">Every review is hands-on tested. No sponsored rankings — just honest assessments to help you choose the right tool.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {reviews.map((r) => (
+          <a href={`/reviews/${r.slug}`} class="card group block no-underline">
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <span class="text-3xl">{r.emoji}</span>
+                <div>
+                  <h2 class="font-bold text-white group-hover:text-violet-400 transition-colors">{r.name}</h2>
+                  <span class="text-xs text-gray-500">{r.category}</span>
+                </div>
+              </div>
+              <span class={`text-xs text-white font-semibold px-2 py-1 rounded-full ${r.badgeColor}`}>{r.badge}</span>
+            </div>
+            <p class="text-gray-400 text-sm mb-4">{r.desc}</p>
+            <div class="flex items-center justify-between text-xs pt-4 border-t border-gray-800">
+              <span class="text-yellow-400 font-semibold">★ {r.rating}/5</span>
+              <span class="text-violet-400">Read review →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer lang="en" />
+</Layout>

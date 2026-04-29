@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+
+const posts = [
+  {
+    slug: 'best-ai-writing-tools-2025',
+    title: 'Best AI Writing Tools in 2025 (Tested & Ranked)',
+    desc: 'We tested 12 AI writing tools so you don\'t have to. Here are the best ones for every use case and budget.',
+    date: 'April 2025',
+    readTime: '8 min read',
+    tag: 'AI Writing',
+  },
+  {
+    slug: 'how-to-make-money-with-ai-tools',
+    title: 'How to Make Money With AI Tools in 2025 (7 Proven Ways)',
+    desc: 'From affiliate marketing to selling AI-generated products — here are 7 ways people are earning with AI tools right now.',
+    date: 'April 2025',
+    readTime: '10 min read',
+    tag: 'Make Money Online',
+  },
+];
+---
+
+<Layout
+  title="Blog — AI Tools Weekly | Tips, Reviews & Tutorials"
+  description="Guides, comparisons and tutorials to help you get more from AI tools. Updated weekly."
+  lang="en"
+>
+  <Navbar lang="en" />
+  <main class="pt-28 pb-16 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-14">
+        <h1 class="text-4xl font-bold text-white mb-4">Blog</h1>
+        <p class="text-gray-400">Guides and insights to help you use AI tools smarter.</p>
+      </div>
+      <div class="space-y-6">
+        {posts.map((p) => (
+          <a href={`/blog/${p.slug}`} class="card group block no-underline">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs font-semibold bg-violet-600/20 text-violet-300 px-3 py-1 rounded-full">{p.tag}</span>
+              <span class="text-xs text-gray-500">{p.date} · {p.readTime}</span>
+            </div>
+            <h2 class="text-xl font-bold text-white group-hover:text-violet-400 transition-colors mb-2">{p.title}</h2>
+            <p class="text-gray-400 text-sm">{p.desc}</p>
+            <span class="inline-block mt-4 text-violet-400 text-sm">Read article →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+  <Footer lang="en" />
+</Layout>

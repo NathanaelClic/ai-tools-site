@@ -1,0 +1,143 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import NewsletterForm from '../../components/NewsletterForm.astro';
+
+const jasper = {
+  name: 'Jasper AI',
+  emoji: '✍️',
+  rating: 4.8,
+  price: 'From $49/mo',
+  bestFor: 'Long-form content, marketing teams',
+  affiliate: 'https://www.jasper.ai/?fpr=YOUR_ID',
+};
+const copyai = {
+  name: 'Copy.ai',
+  emoji: '📝',
+  rating: 4.6,
+  price: 'Free / From $36/mo',
+  bestFor: 'Short-form copy, beginners, budget users',
+  affiliate: 'https://www.copy.ai/?via=YOUR_ID',
+};
+
+const criteria = [
+  { label: 'Long-form content', jasper: '⭐⭐⭐⭐⭐', copyai: '⭐⭐⭐' },
+  { label: 'Short-form copy', jasper: '⭐⭐⭐⭐', copyai: '⭐⭐⭐⭐⭐' },
+  { label: 'Ease of use', jasper: '⭐⭐⭐⭐', copyai: '⭐⭐⭐⭐⭐' },
+  { label: 'Free plan', jasper: '❌ Trial only', copyai: '✅ 2,000 words/mo' },
+  { label: 'Brand voice', jasper: '⭐⭐⭐⭐⭐', copyai: '⭐⭐⭐' },
+  { label: 'SEO integration', jasper: '✅ Surfer SEO', copyai: '❌ None' },
+  { label: 'Templates', jasper: '50+', copyai: '90+' },
+  { label: 'Affiliate commission', jasper: '30% recurring', copyai: '45% recurring' },
+];
+---
+
+<Layout
+  title="Jasper AI vs Copy.ai (2025) — Which AI Writer Should You Choose?"
+  description="Jasper AI vs Copy.ai compared side by side. Features, pricing, quality, and which one is right for your use case in 2025."
+  lang="en"
+>
+  <Navbar lang="en" />
+
+  <main class="pt-28 pb-16 px-4">
+    <div class="max-w-4xl mx-auto">
+
+      <!-- Breadcrumb -->
+      <nav class="text-xs text-gray-500 mb-8 flex items-center gap-2">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <span>›</span>
+        <a href="/compare" class="hover:text-white transition-colors">Compare</a>
+        <span>›</span>
+        <span class="text-gray-300">Jasper vs Copy.ai</span>
+      </nav>
+
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        Jasper AI vs Copy.ai (2025)<br />
+        <span class="text-violet-400">Which AI Writer Is Worth Your Money?</span>
+      </h1>
+      <p class="text-gray-400 mb-10">We tested both tools head-to-head for writing quality, features, pricing, and ease of use. Here's the honest verdict.</p>
+
+      <!-- Side by Side Cards -->
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        {[jasper, copyai].map((tool) => (
+          <div class="card text-center">
+            <span class="text-4xl mb-3 block">{tool.emoji}</span>
+            <h2 class="text-xl font-bold text-white mb-1">{tool.name}</h2>
+            <div class="text-yellow-400 font-semibold mb-2">★ {tool.rating}/5</div>
+            <p class="text-gray-400 text-sm mb-1"><strong class="text-white">Price:</strong> {tool.price}</p>
+            <p class="text-gray-400 text-sm mb-4"><strong class="text-white">Best for:</strong> {tool.bestFor}</p>
+            <a href={tool.affiliate} target="_blank" rel="noopener noreferrer sponsored" class="btn-primary text-sm py-2 block">
+              Try {tool.name} →
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="card mb-12 overflow-x-auto">
+        <h2 class="text-xl font-bold text-white mb-6">Feature Comparison</h2>
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-gray-500 border-b border-gray-800">
+              <th class="text-left py-3 pr-4">Feature</th>
+              <th class="text-center py-3 px-4">Jasper AI ✍️</th>
+              <th class="text-center py-3 pl-4">Copy.ai 📝</th>
+            </tr>
+          </thead>
+          <tbody>
+            {criteria.map((row) => (
+              <tr class="border-b border-gray-800/50">
+                <td class="py-3 pr-4 text-gray-300">{row.label}</td>
+                <td class="py-3 px-4 text-center text-gray-200">{row.jasper}</td>
+                <td class="py-3 pl-4 text-center text-gray-200">{row.copyai}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Verdict -->
+      <div class="grid md:grid-cols-2 gap-6 mb-12">
+        <div class="card border-violet-500/30">
+          <h3 class="font-bold text-violet-400 mb-3">✅ Choose Jasper AI if...</h3>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li>→ You write long-form blog content regularly</li>
+            <li>→ You need consistent brand voice across a team</li>
+            <li>→ You use Surfer SEO for content optimization</li>
+            <li>→ Budget isn't your primary concern</li>
+          </ul>
+          <a href={jasper.affiliate} target="_blank" rel="noopener noreferrer sponsored" class="btn-primary mt-4 block text-center text-sm">
+            Try Jasper AI →
+          </a>
+        </div>
+        <div class="card border-orange-500/30">
+          <h3 class="font-bold text-orange-400 mb-3">✅ Choose Copy.ai if...</h3>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li>→ You mainly need short-form copy (ads, emails, posts)</li>
+            <li>→ You want to start for free</li>
+            <li>→ You're a beginner or solopreneur</li>
+            <li>→ You want the highest affiliate commissions</li>
+          </ul>
+          <a href={copyai.affiliate} target="_blank" rel="noopener noreferrer sponsored" class="btn-primary mt-4 block text-center text-sm" style="background-color: #ea580c;">
+            Try Copy.ai Free →
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom Line -->
+      <div class="card bg-gray-900 text-center">
+        <h2 class="text-xl font-bold text-white mb-3">Bottom Line</h2>
+        <p class="text-gray-400 text-sm leading-relaxed max-w-2xl mx-auto">
+          <strong class="text-white">Jasper AI</strong> is the better tool overall — especially for long-form content and team use.
+          But <strong class="text-white">Copy.ai's free plan</strong> makes it the obvious starting point if you're new to AI writing.
+          Start with Copy.ai for free, then upgrade to Jasper if you need more power.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <NewsletterForm lang="en" />
+  <Footer lang="en" />
+</Layout>
