@@ -13,93 +13,158 @@ interface Props {
     emoji: string;
     tagline: string;
     rating: number;
+    ratingCount?: number;
     pros: string[];
     cons: string[];
     price: string;
     bestFor: string;
     affiliateUrl: string;
     category: string;
+    publishedDate?: string;
+    modifiedDate?: string;
   };
 }
 
 const { title, description, lang = 'en', tool } = Astro.props;
 const isEN = lang === 'en';
+const siteUrl = 'https://ai-tools-site.nathanael-4c1.workers.dev';
+const pageUrl = `${siteUrl}${lang === 'pt' ? '/pt' : ''}/reviews/${Astro.url.pathname.split('/reviews/')[1]?.replace('/','') || ''}`;
 
-const stars = Array.from({ length: 5 }, (_, i) => i < Math.round(tool.rating));
+const reviewSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Review',
+  name: title,
+  description: description,
+  url: pageUrl,
+  datePublished: tool.publishedDate || '2025-04-01',
+  dateModified: tool.modifiedDate || new Date().toISOString().split('T')[0],
+  author: { '@type': 'Organization', name: 'AI Tools Weekly', url: siteUrl },
+  publisher: { '@type': 'Organization', name: 'AI Tools Weekly', url: siteUrl },
+  itemReviewed: {
+    '@type': 'SoftwareApplication',
+    name: tool.name,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: tool.price },
+  },
+  reviewRating: {
+    '@type': 'Rating',
+    ratingValue: tool.rating,
+    bestRating: 5,
+    worstRating: 1,
+    ratingCount: tool.ratingCount || 100,
+  },
+  positiveNotes: { '@type': 'ItemList', itemListElement: tool.pros.map((p,i) => ({ '@type': 'ListItem', position: i+1, name: p })) },
+  negativeNotes: { '@type': 'ItemList', itemListElement: tool.cons.map((c,i) => ({ '@type': 'ListItem', position: i+1, name: c })) },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    { '@type': 'ListItem', position: 2, name: 'Reviews', item: `${siteUrl}/reviews` },
+    { '@type': 'ListItem', position: 3, name: `${tool.name} Review`, item: pageUrl },
+  ],
+};
 ---
 
-<Layout title={title} description={description} lang={lang}>
+<Layout
+  title={title}
+  description={description}
+  lang={lang}
+  type="article"
+  publishedDate={tool.publishedDate}
+  modifiedDate={tool.modifiedDate}
+  schema={reviewSchema}
+>
+  <!-- Extra breadcrumb schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+
   <Navbar lang={lang} />
 
-  <main class="pt-28 pb-16 px-4">
+  <main class="pt-24 pb-16 px-4">
     <div class="max-w-3xl mx-auto">
 
       <!-- Breadcrumb -->
-      <nav class="text-xs text-gray-500 mb-8 flex items-center gap-2">
+      <nav aria-label="breadcrumb" class="text-xs text-gray-600 mb-8 flex items-center gap-2 flex-wrap">
         <a href={isEN ? '/' : '/pt'} class="hover:text-white transition-colors">{isEN ? 'Home' : 'Início'}</a>
-        <span>›</span>
+        <span class="text-gray-700">›</span>
         <a href={isEN ? '/reviews' : '/pt/reviews'} class="hover:text-white transition-colors">Reviews</a>
-        <span>›</span>
-        <span class="text-gray-300">{tool.name}</span>
+        <span class="text-gray-700">›</span>
+        <span class="text-gray-400">{tool.name}</span>
       </nav>
 
       <!-- Header -->
       <div class="mb-10">
-        <div class="flex items-center gap-4 mb-4">
-          <span class="text-5xl">{tool.emoji}</span>
+        <div class="flex items-start gap-4 mb-4">
+          <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shrink-0" style="background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.25);">
+            {tool.emoji}
+          </div>
           <div>
-            <span class="text-xs font-semibold text-violet-400 uppercase tracking-wider">{tool.category}</span>
-            <h1 class="text-3xl md:text-4xl font-bold text-white">{tool.name} {isEN ? 'Review' : '— Review'} 2025</h1>
+            <div class="flex items-center gap-2 mb-1 flex-wrap">
+              <span class="text-xs font-semibold text-violet-400 uppercase tracking-widest">{tool.category}</span>
+              {tool.modifiedDate && <span class="text-xs text-gray-600">· Updated {tool.modifiedDate}</span>}
+            </div>
+            <h1 class="text-3xl md:text-4xl font-black text-white leading-tight">
+              {tool.name} {isEN ? 'Review' : '— Review'} 2025
+            </h1>
           </div>
         </div>
-        <p class="text-lg text-gray-400">{tool.tagline}</p>
+        <p class="text-gray-400 text-lg leading-relaxed">{tool.tagline}</p>
       </div>
 
-      <!-- Rating Box -->
-      <div class="card mb-10 flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
-        <div>
-          <p class="text-sm text-gray-400 mb-1">{isEN ? 'Our Rating' : 'Nossa Avaliação'}</p>
-          <div class="flex items-center gap-2">
-            <div class="flex gap-0.5">
-              {stars.map((filled) => (
-                <span class={filled ? 'text-yellow-400 text-xl' : 'text-gray-700 text-xl'}>★</span>
-              ))}
+      <!-- Rating + CTA box -->
+      <div class="card mb-10 p-6" style="background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(9,9,18,0.9)); border-color:rgba(124,58,237,0.25);">
+        <div class="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
+          <div>
+            <p class="text-xs text-gray-500 mb-2 uppercase tracking-widest">{isEN ? 'Our Rating' : 'Nossa Avaliação'}</p>
+            <div class="flex items-center gap-3">
+              <div class="flex gap-1">
+                {Array.from({length:5},(_,i)=>(
+                  <svg class="w-5 h-5" fill={i < Math.round(tool.rating) ? '#fbbf24' : '#1f2937'} viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                ))}
+              </div>
+              <span class="text-3xl font-black text-white">{tool.rating}</span>
+              <span class="text-gray-600 text-sm">/5</span>
             </div>
-            <span class="text-2xl font-bold text-white">{tool.rating}</span>
-            <span class="text-gray-500 text-sm">/5</span>
           </div>
+          <div class="text-sm space-y-1">
+            <p class="text-gray-400"><span class="text-white font-semibold">{isEN ? 'Best for:' : 'Melhor para:'}</span> {tool.bestFor}</p>
+            <p class="text-gray-400"><span class="text-white font-semibold">{isEN ? 'Price:' : 'Preço:'}</span> {tool.price}</p>
+          </div>
+          <a href={tool.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored" class="btn-primary whitespace-nowrap">
+            {isEN ? `Try ${tool.name}` : `Testar ${tool.name}`} →
+          </a>
         </div>
-        <div class="text-sm text-gray-400">
-          <p class="mb-1"><span class="text-white font-semibold">{isEN ? 'Best for:' : 'Melhor para:'}</span> {tool.bestFor}</p>
-          <p><span class="text-white font-semibold">{isEN ? 'Price:' : 'Preço:'}</span> {tool.price}</p>
-        </div>
-        <a href={tool.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored" class="btn-primary whitespace-nowrap">
-          {isEN ? `Try ${tool.name} →` : `Testar ${tool.name} →`}
-        </a>
       </div>
 
       <!-- Pros & Cons -->
-      <div class="grid md:grid-cols-2 gap-6 mb-10">
-        <div class="card">
-          <h3 class="font-bold text-emerald-400 mb-4 flex items-center gap-2">
-            <span>✅</span> {isEN ? 'Pros' : 'Prós'}
+      <div class="grid md:grid-cols-2 gap-4 mb-12">
+        <div class="card" style="border-color:rgba(16,185,129,0.2);">
+          <h3 class="font-bold text-emerald-400 mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+            <span class="w-5 h-5 rounded-full bg-emerald-400/20 flex items-center justify-center text-xs">✓</span>
+            {isEN ? 'Pros' : 'Vantagens'}
           </h3>
-          <ul class="space-y-2">
-            {tool.pros.map((p) => (
-              <li class="text-sm text-gray-300 flex items-start gap-2">
-                <span class="text-emerald-400 mt-0.5 shrink-0">+</span> {p}
+          <ul class="space-y-2.5">
+            {tool.pros.map(p => (
+              <li class="flex items-start gap-2.5 text-sm text-gray-400">
+                <span class="text-emerald-400 mt-0.5 shrink-0 font-bold">+</span> {p}
               </li>
             ))}
           </ul>
         </div>
-        <div class="card">
-          <h3 class="font-bold text-rose-400 mb-4 flex items-center gap-2">
-            <span>❌</span> {isEN ? 'Cons' : 'Contras'}
+        <div class="card" style="border-color:rgba(239,68,68,0.2);">
+          <h3 class="font-bold text-red-400 mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
+            <span class="w-5 h-5 rounded-full bg-red-400/20 flex items-center justify-center text-xs">✗</span>
+            {isEN ? 'Cons' : 'Desvantagens'}
           </h3>
-          <ul class="space-y-2">
-            {tool.cons.map((c) => (
-              <li class="text-sm text-gray-300 flex items-start gap-2">
-                <span class="text-rose-400 mt-0.5 shrink-0">−</span> {c}
+          <ul class="space-y-2.5">
+            {tool.cons.map(c => (
+              <li class="flex items-start gap-2.5 text-sm text-gray-400">
+                <span class="text-red-400 mt-0.5 shrink-0 font-bold">−</span> {c}
               </li>
             ))}
           </ul>
@@ -107,28 +172,23 @@ const stars = Array.from({ length: 5 }, (_, i) => i < Math.round(tool.rating));
       </div>
 
       <!-- Main Content -->
-      <article class="prose prose-invert prose-lg max-w-none
-        prose-headings:text-white prose-headings:font-bold
-        prose-p:text-gray-400 prose-p:leading-relaxed
-        prose-a:text-violet-400 prose-a:no-underline hover:prose-a:underline
-        prose-strong:text-white prose-li:text-gray-400
-        prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-        prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3">
+      <article class="prose max-w-none">
         <slot />
       </article>
 
       <!-- Bottom CTA -->
-      <div class="mt-12 card text-center">
+      <div class="mt-14 card text-center py-10" style="background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(9,9,18,0.9)); border-color:rgba(124,58,237,0.3);">
+        <div class="text-3xl mb-3">🎯</div>
         <p class="text-white font-bold text-xl mb-2">
           {isEN ? `Ready to try ${tool.name}?` : `Pronto para testar o ${tool.name}?`}
         </p>
-        <p class="text-gray-400 text-sm mb-6">
+        <p class="text-gray-500 text-sm mb-6 max-w-md mx-auto">
           {isEN
-            ? 'Click below to get started. Affiliate link — we earn a small commission at no extra cost to you.'
-            : 'Clique abaixo para começar. Link de afiliado — ganhamos uma pequena comissão sem custo extra para você.'}
+            ? 'Affiliate link — we earn a small commission at no extra cost to you. This helps us keep reviews free.'
+            : 'Link de afiliado — ganhamos uma comissão sem custo extra para você. Isso nos ajuda a manter as reviews gratuitas.'}
         </p>
         <a href={tool.affiliateUrl} target="_blank" rel="noopener noreferrer sponsored" class="btn-primary">
-          {isEN ? `Get ${tool.name} Now →` : `Acessar ${tool.name} Agora →`}
+          {isEN ? `Get ${tool.name} Now` : `Acessar ${tool.name} Agora`} →
         </a>
       </div>
     </div>

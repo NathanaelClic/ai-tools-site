@@ -1,25 +1,32 @@
 ---
-interface Props {
-  lang?: string;
-}
+interface Props { lang?: string; }
 const { lang = 'en' } = Astro.props;
 const isEN = lang === 'en';
 ---
 
-<section id="newsletter" class="my-20">
-  <div class="max-w-2xl mx-auto px-4 text-center">
-    <div class="card p-10">
-      <span class="text-4xl mb-4 block">📬</span>
-      <h2 class="text-2xl font-bold text-white mb-2">
+<section id="newsletter" class="py-24 px-4 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at center, rgba(124,58,237,0.08) 0%, transparent 70%);"></div>
+
+  <div class="max-w-2xl mx-auto relative">
+    <div class="card py-12 px-8 text-center" style="background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(9,9,18,0.95)); border-color:rgba(124,58,237,0.25);">
+
+      <!-- Icon -->
+      <div class="w-14 h-14 rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl animate-float" style="background:rgba(124,58,237,0.2); border:1px solid rgba(124,58,237,0.3);">
+        📬
+      </div>
+
+      <span class="text-xs font-semibold text-violet-400 uppercase tracking-widest mb-3 block">Free Newsletter</span>
+
+      <h2 class="text-3xl font-black text-white mb-3">
         {isEN ? 'Get the Best AI Tools Every Week' : 'As Melhores Ferramentas de IA toda semana'}
       </h2>
-      <p class="text-gray-400 mb-6 text-sm">
+      <p class="text-gray-500 mb-8 text-sm leading-relaxed max-w-md mx-auto">
         {isEN
-          ? 'Join 2,000+ readers. Every Tuesday: top AI tool reviews, deals & tutorials. Free forever.'
-          : 'Junte-se a mais de 2.000 leitores. Toda terça: reviews, ofertas e tutoriais de IA. Grátis.'}
+          ? 'Join 2,000+ professionals. Every Tuesday: top tool reviews, exclusive deals, and productivity tips. Free forever.'
+          : 'Junte-se a mais de 2.000 profissionais. Toda terça: reviews, ofertas e dicas. Grátis para sempre.'}
       </p>
 
-      <!-- Beehiiv embed form — replace the src with your Beehiiv publication embed URL -->
+      <!-- Beehiiv embed — replace YOUR_BEEHIIV_EMBED_ID with your actual embed ID from Beehiiv > Grow > Forms -->
       <iframe
         src="https://embeds.beehiiv.com/YOUR_BEEHIIV_EMBED_ID"
         data-test-id="beehiiv-embed"
@@ -27,12 +34,16 @@ const isEN = lang === 'en';
         height="52"
         frameborder="0"
         scrolling="no"
-        style="border-radius: 8px; overflow: hidden; margin: 0; background: transparent;"
+        style="border-radius:8px; overflow:hidden; margin:0; background:transparent;"
       ></iframe>
 
-      <p class="text-xs text-gray-600 mt-4">
-        {isEN ? 'No spam. Unsubscribe anytime.' : 'Sem spam. Cancele quando quiser.'}
-      </p>
+      <div class="flex items-center justify-center gap-4 mt-6 text-xs text-gray-600">
+        <span>✓ {isEN ? 'No spam' : 'Sem spam'}</span>
+        <span>·</span>
+        <span>✓ {isEN ? 'Unsubscribe anytime' : 'Cancele quando quiser'}</span>
+        <span>·</span>
+        <span>✓ {isEN ? 'Free forever' : 'Grátis para sempre'}</span>
+      </div>
     </div>
   </div>
 </section>

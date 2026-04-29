@@ -1,40 +1,39 @@
 ---
-interface Props {
-  lang?: string;
-}
+interface Props { lang?: string; }
 const { lang = 'en' } = Astro.props;
 const isEN = lang === 'en';
+const base = isEN ? '' : '/pt';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 border-b border-gray-800/60 backdrop-blur-md bg-gray-950/80">
-  <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-    <a href={isEN ? '/' : '/pt'} class="flex items-center gap-2 font-bold text-lg text-white">
-      <span class="text-violet-400">⚡</span>
-      <span>AI Tools Weekly</span>
-    </a>
+<header class="fixed top-0 left-0 right-0 z-50">
+  <div class="border-b border-white/5 backdrop-blur-xl" style="background:rgba(5,5,10,0.85);">
+    <nav class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
 
-    <div class="hidden md:flex items-center gap-6 text-sm text-gray-300">
-      <a href={isEN ? '/reviews' : '/pt/reviews'} class="hover:text-white transition-colors">
-        {isEN ? 'Reviews' : 'Reviews'}
+      <a href={isEN ? '/' : '/pt'} class="flex items-center gap-2.5 group">
+        <div class="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center text-sm font-bold shadow-lg group-hover:shadow-violet-500/50 transition-all" style="box-shadow:0 0 16px rgba(124,58,237,0.4);">⚡</div>
+        <span class="font-bold text-white text-sm tracking-tight">AI Tools <span class="text-violet-400">Weekly</span></span>
       </a>
-      <a href={isEN ? '/compare' : '/pt/compare'} class="hover:text-white transition-colors">
-        {isEN ? 'Compare' : 'Comparar'}
-      </a>
-      <a href={isEN ? '/blog' : '/pt/blog'} class="hover:text-white transition-colors">
-        Blog
-      </a>
-      <a href={isEN ? '/best-ai-tools' : '/pt/melhores-ferramentas'} class="hover:text-white transition-colors">
-        {isEN ? 'Best Tools' : 'Melhores'}
-      </a>
-    </div>
 
-    <div class="flex items-center gap-3">
-      <a href={isEN ? '/pt' : '/'} class="text-xs text-gray-400 hover:text-white transition-colors border border-gray-700 px-3 py-1.5 rounded-lg">
-        {isEN ? '🇧🇷 PT' : '🇺🇸 EN'}
-      </a>
-      <a href="#newsletter" class="btn-primary text-sm py-2 px-4">
-        {isEN ? 'Free Newsletter' : 'Newsletter Grátis'}
-      </a>
-    </div>
-  </nav>
+      <div class="hidden md:flex items-center gap-1 text-sm">
+        {[
+          { href: `${base}/reviews`, label: 'Reviews' },
+          { href: `${base}/compare`, label: isEN ? 'Compare' : 'Comparar' },
+          { href: `${base}/blog`,    label: 'Blog' },
+        ].map(link => (
+          <a href={link.href} class="text-gray-400 hover:text-white px-3 py-1.5 rounded-lg transition-all" style="hover:background:rgba(255,255,255,0.05);">
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a href={isEN ? '/pt' : '/'} class="text-xs text-gray-500 hover:text-gray-300 transition-colors border px-3 py-1.5 rounded-lg" style="border-color:rgba(255,255,255,0.1);">
+          {isEN ? '🇧🇷 PT' : '🇺🇸 EN'}
+        </a>
+        <a href="#newsletter" class="btn-primary text-xs py-2 px-4">
+          {isEN ? '📬 Newsletter' : '📬 Newsletter'}
+        </a>
+      </div>
+    </nav>
+  </div>
 </header>

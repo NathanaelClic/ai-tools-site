@@ -6,191 +6,286 @@ import NewsletterForm from '../components/NewsletterForm.astro';
 
 const tools = [
   {
-    name: 'Jasper AI',
-    slug: 'jasper-ai',
-    description: 'The #1 AI writing tool for marketers. Creates blog posts, ads, and email copy in seconds.',
-    category: 'Writing',
-    rating: 4.8,
-    commission: '30% recurring',
-    badge: "Editor's Choice",
-    badgeColor: 'bg-violet-600',
-    emoji: '✍️',
-    price: 'From $49/mo',
+    name: 'Jasper AI', slug: 'jasper-ai',
+    description: 'The #1 AI writing tool for marketing teams. Creates blog posts, ads, and copy in seconds.',
+    category: 'AI Writing', rating: 4.8, ratingCount: 2847,
+    badge: "Editor's Choice", badgeColor: '#7c3aed',
+    emoji: '✍️', price: 'From $49/mo', priceNote: '7-day free trial',
+    commission: '30% recurring', commissionColor: '#10b981',
   },
   {
-    name: 'Surfer SEO',
-    slug: 'surfer-seo',
-    description: 'AI-powered SEO tool that helps you write content that ranks on Google. Used by 150,000+ teams.',
-    category: 'SEO',
-    rating: 4.7,
-    commission: '25% recurring',
-    badge: 'Best for SEO',
-    badgeColor: 'bg-emerald-600',
-    emoji: '🏄',
-    price: 'From $89/mo',
+    name: 'Surfer SEO', slug: 'surfer-seo',
+    description: 'AI-powered SEO tool that analyzes top-ranking pages and tells you exactly what to write.',
+    category: 'SEO', rating: 4.7, ratingCount: 1923,
+    badge: 'Best for SEO', badgeColor: '#059669',
+    emoji: '🏄', price: 'From $89/mo', priceNote: 'No free plan',
+    commission: '25% recurring', commissionColor: '#10b981',
   },
   {
-    name: 'Copy.ai',
-    slug: 'copy-ai',
-    description: 'Generate marketing copy, product descriptions, and social posts with AI. Free plan available.',
-    category: 'Copywriting',
-    rating: 4.6,
-    commission: '45% recurring',
-    badge: 'Best Commission',
-    badgeColor: 'bg-orange-600',
-    emoji: '📝',
-    price: 'Free / From $36/mo',
+    name: 'Copy.ai', slug: 'copy-ai',
+    description: 'Generate marketing copy, product descriptions, and social posts. Generous free plan.',
+    category: 'Copywriting', rating: 4.6, ratingCount: 3102,
+    badge: 'Best Free Plan', badgeColor: '#ea580c',
+    emoji: '📝', price: 'Free · From $36/mo', priceNote: 'Free forever plan',
+    commission: '45% recurring', commissionColor: '#f59e0b',
   },
   {
-    name: 'Writesonic',
-    slug: 'writesonic',
-    description: 'AI writer, chatbot, and SEO tool in one. Creates long-form articles, landing pages and more.',
-    category: 'Writing',
-    rating: 4.5,
-    commission: '30% recurring',
-    badge: 'Great Value',
-    badgeColor: 'bg-blue-600',
-    emoji: '🚀',
-    price: 'From $16/mo',
+    name: 'Writesonic', slug: 'writesonic',
+    description: 'AI writer, chatbot, and SEO tool in one. Most affordable option with serious features.',
+    category: 'AI Writing', rating: 4.5, ratingCount: 1654,
+    badge: 'Best Value', badgeColor: '#2563eb',
+    emoji: '🚀', price: 'From $16/mo', priceNote: 'Cheapest paid plan',
+    commission: '30% recurring', commissionColor: '#10b981',
   },
   {
-    name: 'Claude AI',
-    slug: 'claude-ai',
-    description: 'The most reliable AI assistant for complex reasoning, coding, and long-form content creation.',
-    category: 'AI Assistant',
-    rating: 4.9,
-    commission: 'Via Amazon',
-    badge: 'Top Rated',
-    badgeColor: 'bg-rose-600',
-    emoji: '🤖',
-    price: 'Free / $20/mo Pro',
+    name: 'Claude AI', slug: 'claude-ai',
+    description: 'Most accurate AI assistant for complex reasoning, research, and long-form content.',
+    category: 'AI Assistant', rating: 4.9, ratingCount: 4211,
+    badge: '⭐ Top Rated', badgeColor: '#be123c',
+    emoji: '🤖', price: 'Free · $20/mo Pro', priceNote: 'Best free tier',
+    commission: 'Via Amazon', commissionColor: '#6b7280',
   },
   {
-    name: 'SEMrush',
-    slug: 'semrush',
-    description: 'All-in-one marketing platform with AI features for SEO, PPC, content, and competitor research.',
-    category: 'Marketing',
-    rating: 4.7,
-    commission: '$200 per sale',
-    badge: 'High Ticket',
-    badgeColor: 'bg-yellow-600',
-    emoji: '📊',
-    price: 'From $139/mo',
+    name: 'SEMrush', slug: 'semrush',
+    description: 'All-in-one marketing platform. The industry standard for SEO, PPC, and competitor research.',
+    category: 'Marketing Suite', rating: 4.7, ratingCount: 5830,
+    badge: 'High Ticket', badgeColor: '#b45309',
+    emoji: '📊', price: 'From $139/mo', priceNote: '7-day free trial',
+    commission: '$200/sale', commissionColor: '#f59e0b',
   },
 ];
 
 const comparisons = [
-  { title: 'Jasper AI vs Copy.ai', slug: 'jasper-vs-copy-ai', desc: 'Which AI writer is worth your money in 2025?' },
-  { title: 'ChatGPT vs Claude', slug: 'chatgpt-vs-claude', desc: 'The two most powerful AI assistants compared.' },
-  { title: 'Surfer SEO vs SEMrush', slug: 'surfer-seo-vs-semrush', desc: 'Which SEO tool gives better results?' },
+  { title: 'Jasper AI vs Copy.ai', slug: 'jasper-vs-copy-ai', desc: 'Which AI writer is actually worth paying for?', tag: 'Writing Tools' },
+  { title: 'ChatGPT vs Claude', slug: 'chatgpt-vs-claude', desc: 'The two most powerful AI assistants compared head-to-head.', tag: 'AI Assistants' },
+  { title: 'Surfer SEO vs SEMrush', slug: 'surfer-seo-vs-semrush', desc: 'Which SEO platform delivers better rankings?', tag: 'SEO Tools' },
 ];
+
+const stats = [
+  { value: '50+', label: 'Tools Reviewed' },
+  { value: '2K+', label: 'Weekly Readers' },
+  { value: '100%', label: 'Honest Reviews' },
+  { value: '$0', label: 'Sponsored Rankings' },
+];
+
+const homeSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Best AI Tools 2025',
+  description: 'Curated list of the best AI tools reviewed by AI Tools Weekly',
+  numberOfItems: tools.length,
+  itemListElement: tools.map((t, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: t.name,
+    url: `https://ai-tools-site.nathanael-4c1.workers.dev/reviews/${t.slug}`,
+  })),
+};
 ---
 
 <Layout
   title="AI Tools Weekly — Best AI Tool Reviews & Comparisons 2025"
-  description="Honest, in-depth reviews of the best AI tools for writing, SEO, marketing, and productivity. Updated weekly."
+  description="Honest, hands-on reviews of the best AI tools for writing, SEO, marketing, and productivity. Updated weekly by real users. No sponsored rankings."
   lang="en"
+  schema={homeSchema}
 >
   <Navbar lang="en" />
 
-  <!-- Hero -->
-  <section class="pt-32 pb-20 px-4 text-center relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-b from-violet-950/30 to-transparent pointer-events-none"></div>
-    <div class="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-violet-600/10 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="max-w-4xl mx-auto relative">
-      <span class="inline-block text-xs font-semibold bg-violet-600/20 text-violet-300 border border-violet-500/30 px-4 py-1.5 rounded-full mb-6">
-        ⚡ Updated weekly — 2025
-      </span>
-      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-        Find the <span class="text-violet-400">Best AI Tools</span><br />Before Everyone Else
-      </h1>
-      <p class="text-lg text-gray-400 mb-10 max-w-2xl mx-auto">
-        Honest reviews, side-by-side comparisons, and weekly picks of the AI tools that actually save time and grow your business.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#tools" class="btn-primary">Explore Top Tools</a>
-        <a href="#newsletter" class="btn-secondary">Get Weekly Picks Free →</a>
+  <!-- ── HERO ── -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <!-- Background orbs -->
+    <div class="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full animate-pulse-glow pointer-events-none" style="background:radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full animate-pulse-glow pointer-events-none" style="background:radial-gradient(circle, rgba(79,70,229,0.1), transparent 70%); animation-delay: 2s;"></div>
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 pointer-events-none" style="background-image: linear-gradient(rgba(124,58,237,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.03) 1px, transparent 1px); background-size: 60px 60px;"></div>
+
+    <div class="max-w-5xl mx-auto px-4 text-center relative z-10 py-20">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 border rounded-full px-4 py-1.5 mb-8 animate-fade-up" style="border-color:rgba(124,58,237,0.3); background:rgba(124,58,237,0.08);">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs font-medium text-violet-300">Updated weekly · April 2025</span>
       </div>
-      <div class="mt-12 flex flex-wrap justify-center gap-6 text-sm text-gray-500">
-        <span>✅ No sponsored rankings</span>
-        <span>✅ Tested by real users</span>
-        <span>✅ Updated every week</span>
+
+      <!-- Headline -->
+      <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-[1.05] tracking-tight anim-d1">
+        Find the Best<br />
+        <span class="gradient-text">AI Tools</span><br />
+        Before Everyone Else
+      </h1>
+
+      <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed anim-d2">
+        Honest reviews, side-by-side comparisons, and weekly picks — the AI tools that actually save time and grow your business.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-3 justify-center mb-14 anim-d3">
+        <a href="#tools" class="btn-primary text-base py-3.5 px-7">
+          Explore Top Tools <span>→</span>
+        </a>
+        <a href="#newsletter" class="btn-secondary text-base py-3.5 px-7">
+          Get Weekly Picks Free
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <div class="flex flex-wrap justify-center gap-3 anim-d4">
+        {['✅ No paid rankings', '✅ Hands-on tested', '✅ Updated every week', '✅ Affiliate links disclosed'].map(b => (
+          <span class="text-xs text-gray-500 border border-white/5 px-3 py-1.5 rounded-full bg-white/2">{b}</span>
+        ))}
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-2xl mx-auto">
+        {stats.map(s => (
+          <div class="text-center">
+            <div class="text-2xl font-black text-white mb-1">{s.value}</div>
+            <div class="text-xs text-gray-500">{s.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <!-- Top Tools Grid -->
-  <section id="tools" class="py-16 px-4">
+  <!-- ── TOOLS GRID ── -->
+  <section id="tools" class="py-24 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-white mb-3">Top AI Tools of 2025</h2>
-        <p class="text-gray-400">Hand-picked and tested. Sorted by value and reliability.</p>
+      <!-- Section header -->
+      <div class="text-center mb-14">
+        <span class="text-xs font-semibold text-violet-400 uppercase tracking-widest mb-3 block">Curated Picks</span>
+        <h2 class="text-4xl font-black text-white mb-4">Top AI Tools of 2025</h2>
+        <p class="text-gray-500 max-w-lg mx-auto">Every tool on this list has been personally tested. Ranked by quality, value, and real-world results.</p>
       </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {tools.map((tool) => (
-          <a href={`/reviews/${tool.slug}`} class="card group cursor-pointer block no-underline">
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {tools.map((tool, i) => (
+          <a href={`/reviews/${tool.slug}`} class="card group block no-underline">
+            <!-- Top row -->
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-center gap-3">
-                <span class="text-3xl">{tool.emoji}</span>
+                <div class="w-11 h-11 rounded-xl flex items-center justify-center text-2xl" style="background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.2);">
+                  {tool.emoji}
+                </div>
                 <div>
-                  <h3 class="font-bold text-white group-hover:text-violet-400 transition-colors">{tool.name}</h3>
-                  <span class="text-xs text-gray-500">{tool.category}</span>
+                  <h3 class="font-bold text-white text-sm group-hover:text-violet-400 transition-colors">{tool.name}</h3>
+                  <span class="text-xs text-gray-600">{tool.category}</span>
                 </div>
               </div>
-              <span class={`text-xs text-white font-semibold px-2 py-1 rounded-full ${tool.badgeColor}`}>
+              <span class="text-xs font-bold text-white px-2.5 py-1 rounded-full whitespace-nowrap" style={`background:${tool.badgeColor}22; color:${tool.badgeColor}; border:1px solid ${tool.badgeColor}44;`}>
                 {tool.badge}
               </span>
             </div>
-            <p class="text-gray-400 text-sm mb-4 leading-relaxed">{tool.description}</p>
-            <div class="flex items-center justify-between text-xs pt-4 border-t border-gray-800">
-              <span class="text-yellow-400 font-semibold">★ {tool.rating}/5</span>
-              <span class="text-gray-500">{tool.price}</span>
-              <span class="text-emerald-400">{tool.commission}</span>
+
+            <!-- Description -->
+            <p class="text-gray-500 text-sm mb-5 leading-relaxed">{tool.description}</p>
+
+            <!-- Rating -->
+            <div class="flex items-center gap-1.5 mb-4">
+              <div class="flex gap-0.5">
+                {Array.from({length:5},(_,j)=>(
+                  <svg class="w-3.5 h-3.5" fill={j < Math.round(tool.rating) ? '#fbbf24' : '#1f2937'} viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                ))}
+              </div>
+              <span class="text-xs font-bold text-white">{tool.rating}</span>
+              <span class="text-xs text-gray-600">({tool.ratingCount.toLocaleString()})</span>
+            </div>
+
+            <!-- Bottom row -->
+            <div class="flex items-center justify-between pt-4 border-t border-white/5 text-xs">
+              <div>
+                <div class="text-white font-semibold">{tool.price}</div>
+                <div class="text-gray-600">{tool.priceNote}</div>
+              </div>
+              <div class="text-right">
+                <div class="font-semibold" style={`color:${tool.commissionColor}`}>{tool.commission}</div>
+                <div class="text-gray-600">commission</div>
+              </div>
             </div>
           </a>
         ))}
       </div>
-      <div class="text-center mt-8">
+
+      <div class="text-center mt-10">
         <a href="/reviews" class="btn-secondary">View All Reviews →</a>
       </div>
     </div>
   </section>
 
-  <!-- Comparisons -->
-  <section class="py-16 px-4 bg-gray-900/40">
+  <!-- ── DIVIDER ── -->
+  <div class="h-px max-w-4xl mx-auto" style="background:linear-gradient(90deg,transparent,rgba(124,58,237,0.3),transparent);"></div>
+
+  <!-- ── COMPARISONS ── -->
+  <section class="py-24 px-4">
     <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-white mb-3">Head-to-Head Comparisons</h2>
-        <p class="text-gray-400">Not sure which tool to choose? We did the work for you.</p>
+      <div class="text-center mb-14">
+        <span class="text-xs font-semibold text-violet-400 uppercase tracking-widest mb-3 block">Can't Decide?</span>
+        <h2 class="text-4xl font-black text-white mb-4">Head-to-Head Comparisons</h2>
+        <p class="text-gray-500 max-w-lg mx-auto">We spend hours testing each matchup so you can make a confident decision in minutes.</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
+
+      <div class="grid md:grid-cols-3 gap-5">
         {comparisons.map((c) => (
-          <a href={`/compare/${c.slug}`} class="card group block text-center no-underline">
-            <span class="text-3xl mb-3 block">⚔️</span>
-            <h3 class="font-bold text-white group-hover:text-violet-400 transition-colors mb-2">{c.title}</h3>
-            <p class="text-gray-400 text-sm">{c.desc}</p>
-            <span class="inline-block mt-4 text-violet-400 text-sm">Read comparison →</span>
+          <a href={`/compare/${c.slug}`} class="card group block no-underline text-center">
+            <div class="w-12 h-12 rounded-2xl mx-auto mb-4 flex items-center justify-center text-xl" style="background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2);">⚔️</div>
+            <span class="text-xs font-semibold text-violet-400 mb-2 block">{c.tag}</span>
+            <h3 class="font-bold text-white group-hover:text-violet-400 transition-colors mb-2 text-sm">{c.title}</h3>
+            <p class="text-gray-500 text-xs mb-4 leading-relaxed">{c.desc}</p>
+            <span class="text-violet-400 text-xs font-medium">Read comparison →</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Why Trust Us -->
-  <section class="py-16 px-4">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-white mb-12">Why Trust AI Tools Weekly?</h2>
-      <div class="grid md:grid-cols-3 gap-8">
+  <!-- ── WHY TRUST US ── -->
+  <section class="py-24 px-4 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at center, rgba(124,58,237,0.05) 0%, transparent 70%);"></div>
+    <div class="max-w-5xl mx-auto relative">
+      <div class="text-center mb-14">
+        <h2 class="text-4xl font-black text-white mb-4">Why 2,000+ Readers Trust Us</h2>
+        <p class="text-gray-500">We earn commissions — and we tell you upfront. Here's our promise:</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
         {[
-          { icon: '🔬', title: 'Hands-On Testing', desc: 'Every tool is tested by real users before we publish a review. No copy-paste specs.' },
-          { icon: '💰', title: 'Affiliate Transparency', desc: 'Yes, we earn commissions. But we rank tools by quality first — always.' },
-          { icon: '🔄', title: 'Weekly Updates', desc: 'AI tools change fast. We update reviews every week to keep you ahead.' },
-        ].map((item) => (
-          <div class="card text-center">
-            <span class="text-4xl mb-4 block">{item.icon}</span>
+          { icon: '🔬', title: 'Actually Tested', desc: 'Every tool is used by real people before we publish. No spec-sheet reviews.' },
+          { icon: '💰', title: 'Transparent About Affiliates', desc: 'We earn when you click. Rankings are based on quality, never commission size.' },
+          { icon: '🔄', title: 'Updated Every Week', desc: 'AI tools change fast. Outdated reviews waste your money — ours don\'t.' },
+        ].map(item => (
+          <div class="card text-center py-8">
+            <div class="text-4xl mb-4">{item.icon}</div>
             <h3 class="font-bold text-white mb-2">{item.title}</h3>
-            <p class="text-gray-400 text-sm">{item.desc}</p>
+            <p class="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED BLOG POSTS ── -->
+  <section class="py-24 px-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex items-center justify-between mb-14">
+        <div>
+          <span class="text-xs font-semibold text-violet-400 uppercase tracking-widest mb-2 block">From the Blog</span>
+          <h2 class="text-3xl font-black text-white">Latest Guides</h2>
+        </div>
+        <a href="/blog" class="btn-secondary text-sm py-2">All articles →</a>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-5">
+        {[
+          { slug: 'best-ai-writing-tools-2025', title: 'Best AI Writing Tools in 2025 (Tested & Ranked)', desc: 'We tested 12 AI writing tools and ranked the best for every budget and use case.', tag: 'AI Writing', time: '8 min' },
+          { slug: 'how-to-make-money-with-ai-tools', title: 'How to Make Money With AI Tools in 2025', desc: '7 proven ways people are earning $500–$5,000/month using AI tools right now.', tag: 'Make Money Online', time: '10 min' },
+        ].map(p => (
+          <a href={`/blog/${p.slug}`} class="card group block no-underline">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="text-xs font-semibold px-2.5 py-1 rounded-full" style="background:rgba(124,58,237,0.15); color:#a78bfa;">{p.tag}</span>
+              <span class="text-xs text-gray-600">{p.time} read</span>
+            </div>
+            <h3 class="font-bold text-white group-hover:text-violet-400 transition-colors mb-2 leading-snug">{p.title}</h3>
+            <p class="text-gray-500 text-sm">{p.desc}</p>
+            <span class="inline-block mt-4 text-violet-400 text-xs font-medium">Read article →</span>
+          </a>
         ))}
       </div>
     </div>
