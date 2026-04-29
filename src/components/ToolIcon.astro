@@ -1,0 +1,29 @@
+---
+interface Props {
+  tool: string;
+  size?: 'sm' | 'md' | 'lg';
+}
+const { tool, size = 'md' } = Astro.props;
+
+const sizes = { sm: 'w-9 h-9 text-lg', md: 'w-12 h-12 text-2xl', lg: 'w-16 h-16 text-3xl' };
+
+const icons: Record<string, { emoji: string; bg: string; border: string; glow: string }> = {
+  'jasper-ai':   { emoji: '✍️', bg: 'rgba(124,58,237,0.2)',  border: 'rgba(124,58,237,0.4)',  glow: 'rgba(124,58,237,0.3)' },
+  'surfer-seo':  { emoji: '🏄', bg: 'rgba(5,150,105,0.2)',   border: 'rgba(5,150,105,0.4)',   glow: 'rgba(5,150,105,0.3)'  },
+  'copy-ai':     { emoji: '📝', bg: 'rgba(234,88,12,0.2)',   border: 'rgba(234,88,12,0.4)',   glow: 'rgba(234,88,12,0.3)'  },
+  'writesonic':  { emoji: '🚀', bg: 'rgba(37,99,235,0.2)',   border: 'rgba(37,99,235,0.4)',   glow: 'rgba(37,99,235,0.3)'  },
+  'claude-ai':   { emoji: '🤖', bg: 'rgba(190,18,60,0.2)',   border: 'rgba(190,18,60,0.4)',   glow: 'rgba(190,18,60,0.3)'  },
+  'semrush':     { emoji: '📊', bg: 'rgba(180,83,9,0.2)',    border: 'rgba(180,83,9,0.4)',    glow: 'rgba(180,83,9,0.3)'   },
+  'chatgpt':     { emoji: '💬', bg: 'rgba(16,185,129,0.2)',  border: 'rgba(16,185,129,0.4)',  glow: 'rgba(16,185,129,0.3)' },
+  'notion-ai':   { emoji: '📓', bg: 'rgba(255,255,255,0.08)', border: 'rgba(255,255,255,0.15)', glow: 'rgba(255,255,255,0.05)' },
+};
+
+const icon = icons[tool] ?? { emoji: '⚙️', bg: 'rgba(124,58,237,0.15)', border: 'rgba(124,58,237,0.3)', glow: 'rgba(124,58,237,0.2)' };
+---
+
+<div
+  class={`${sizes[size]} rounded-2xl flex items-center justify-center shrink-0`}
+  style={`background:${icon.bg}; border:1px solid ${icon.border}; box-shadow:0 0 16px ${icon.glow};`}
+>
+  {icon.emoji}
+</div>

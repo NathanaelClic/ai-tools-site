@@ -1,0 +1,93 @@
+<!-- Floating mock "review dashboard" shown in the hero section -->
+<div class="relative w-full max-w-md mx-auto select-none pointer-events-none" aria-hidden="true">
+
+  <!-- Glow behind card -->
+  <div class="absolute inset-0 rounded-3xl blur-3xl opacity-30" style="background:radial-gradient(circle, #7c3aed 0%, #4f46e5 50%, transparent 80%);"></div>
+
+  <!-- Main card -->
+  <div class="relative rounded-2xl border p-5" style="background:linear-gradient(135deg,rgba(30,18,60,0.95),rgba(10,8,20,0.98)); border-color:rgba(124,58,237,0.35); box-shadow:0 24px 80px rgba(124,58,237,0.2), inset 0 1px 0 rgba(255,255,255,0.06);">
+
+    <!-- Card header -->
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-2">
+        <div class="w-2 h-2 rounded-full bg-red-500"></div>
+        <div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+        <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+      </div>
+      <span class="text-xs text-gray-500 font-mono">ai-tools-weekly.com</span>
+      <div class="w-6 h-6 rounded-md bg-violet-600/30 flex items-center justify-center text-xs">⚡</div>
+    </div>
+
+    <!-- Top tool row -->
+    <div class="text-xs text-gray-500 mb-2 font-semibold uppercase tracking-widest">#1 Best AI Writer 2025</div>
+    <div class="flex items-center gap-3 mb-4 p-3 rounded-xl" style="background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2);">
+      <div class="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0" style="background:rgba(124,58,237,0.25);">✍️</div>
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-white text-sm">Jasper AI</div>
+        <div class="flex gap-0.5 mt-0.5">
+          {[1,2,3,4,5].map(s => (
+            <svg class="w-3 h-3" fill="#fbbf24" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          ))}
+        </div>
+      </div>
+      <div class="text-right shrink-0">
+        <div class="text-xs font-bold" style="color:#a78bfa;">4.8/5</div>
+        <div class="text-xs text-emerald-400">30% off</div>
+      </div>
+    </div>
+
+    <!-- Mini bar chart -->
+    <div class="mb-4">
+      <div class="text-xs text-gray-500 mb-2">Category Scores</div>
+      {[
+        { label: 'Writing Quality', pct: 96, color: '#7c3aed' },
+        { label: 'Ease of Use',     pct: 88, color: '#4f46e5' },
+        { label: 'Value for Money', pct: 74, color: '#6d28d9' },
+        { label: 'SEO Features',    pct: 90, color: '#7c3aed' },
+      ].map(b => (
+        <div class="flex items-center gap-2 mb-1.5">
+          <span class="text-xs text-gray-500 w-28 shrink-0">{b.label}</span>
+          <div class="flex-1 h-1.5 rounded-full" style="background:rgba(255,255,255,0.06);">
+            <div class="h-1.5 rounded-full" style={`width:${b.pct}%; background:${b.color};`}></div>
+          </div>
+          <span class="text-xs text-gray-400 w-6 text-right">{b.pct}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Tool comparison row -->
+    <div class="grid grid-cols-3 gap-2 mb-4">
+      {[
+        { e: '✍️', n: 'Jasper',    r: '4.8', c: '#7c3aed', active: true },
+        { e: '📝', n: 'Copy.ai',   r: '4.6', c: '#ea580c', active: false },
+        { e: '🚀', n: 'Writesonic',r: '4.5', c: '#2563eb', active: false },
+      ].map(t => (
+        <div class="rounded-xl p-2.5 text-center" style={`background:${t.active ? 'rgba(124,58,237,0.18)' : 'rgba(255,255,255,0.03)'}; border:1px solid ${t.active ? 'rgba(124,58,237,0.4)' : 'rgba(255,255,255,0.05)'};`}>
+          <div class="text-lg mb-1">{t.e}</div>
+          <div class="text-xs font-semibold text-white">{t.n}</div>
+          <div class="text-xs" style={`color:${t.c};`}>★ {t.r}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA inside card -->
+    <div class="rounded-xl p-2.5 text-center text-xs font-semibold text-white" style="background:linear-gradient(135deg,#7c3aed,#4f46e5); box-shadow:0 4px 12px rgba(124,58,237,0.4);">
+      View Full Review →
+    </div>
+  </div>
+
+  <!-- Floating notification badge -->
+  <div class="absolute -top-3 -right-3 rounded-xl px-3 py-1.5 text-xs font-bold flex items-center gap-1.5 animate-float" style="background:linear-gradient(135deg,#059669,#047857); box-shadow:0 8px 20px rgba(5,150,105,0.4); animation-delay:1s;">
+    <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+    <span class="text-white">New: SEMrush Review</span>
+  </div>
+
+  <!-- Floating commission badge -->
+  <div class="absolute -bottom-3 -left-3 rounded-xl px-3 py-2 text-xs flex items-center gap-2" style="background:rgba(10,8,20,0.95); border:1px solid rgba(124,58,237,0.3); box-shadow:0 8px 20px rgba(0,0,0,0.4);">
+    <span class="text-lg">💰</span>
+    <div>
+      <div class="font-bold text-white text-xs">45% Commission</div>
+      <div class="text-gray-500" style="font-size:10px;">Copy.ai Affiliate</div>
+    </div>
+  </div>
+</div>
