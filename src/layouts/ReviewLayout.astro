@@ -7,6 +7,7 @@ import NewsletterForm from '../components/NewsletterForm.astro';
 interface Props {
   title: string;
   description: string;
+  image?: string;
   lang?: string;
   tool: {
     name: string;
@@ -25,7 +26,7 @@ interface Props {
   };
 }
 
-const { title, description, lang = 'en', tool } = Astro.props;
+const { title, description, image, lang = 'en', tool } = Astro.props;
 const isEN = lang === 'en';
 const siteUrl = 'https://ai-tools-site.nathanael-4c1.workers.dev';
 const pageUrl = `${siteUrl}${lang === 'pt' ? '/pt' : ''}/reviews/${Astro.url.pathname.split('/reviews/')[1]?.replace('/','') || ''}`;
@@ -72,6 +73,7 @@ const breadcrumbSchema = {
 <Layout
   title={title}
   description={description}
+  image={image}
   lang={lang}
   type="article"
   publishedDate={tool.publishedDate}
