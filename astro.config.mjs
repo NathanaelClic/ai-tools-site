@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://yourdomain.com',
+  site: 'https://ai-tools-site.nathanael-4c1.workers.dev',
 
   vite: {
     plugins: [tailwindcss()]
